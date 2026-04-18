@@ -1064,7 +1064,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 continue
 
             property_id = property_ids[0]
-            statistic_id = f"{DOMAIN}:electricity_{account_num}_consumption".lower()
+            safe_account = account_num.replace("-", "_").lower()
+            statistic_id = f"{DOMAIN}:electricity_{safe_account}_consumption"
 
             # Determine which dates to import
             yesterday = (date.today() - timedelta(days=1)).isoformat()
